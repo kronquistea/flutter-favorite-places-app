@@ -31,6 +31,7 @@ class PlacesList extends StatelessWidget {
           ),
         ),
         onTap: () {
+          // Pushes place details screen to stack (displaying place details screen)
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (ctx) => PlaceDetailScreen(place: places[index]),

@@ -28,6 +28,7 @@ final theme = ThemeData().copyWith(
 
 void main() {
   runApp(
+    // Stores the state of the providers for the entire project
     const ProviderScope(child: MyApp()),
   );
 }

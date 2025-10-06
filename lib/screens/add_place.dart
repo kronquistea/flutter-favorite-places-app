@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_favorite_places_app/widgets/image_input.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_favorite_places_app/providers/user_places.dart';
+import 'package:flutter_favorite_places_app/widgets/image_input.dart';
 
+// Like a stateful widget for riverpod
 class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
 
@@ -13,7 +14,10 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
   }
 }
 
+// Like a State<StatefulWidget> for riverpod
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
+  // Controller provided by Flutter (not riverpod),
+  // essentially stores the text that was entered in this textfield form
   final _titleController = TextEditingController();
 
   void _savePlace() {
@@ -23,6 +27,8 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
       return;
     }
 
+    // userPlacesProvider.notifier essentially allows access to the provider's
+    // notifier class (UserPlacesNotifier), which then allows access to the addPlace method
     ref.read(userPlacesProvider.notifier).addPlace(enteredTitle);
 
     Navigator.of(context).pop();

@@ -11,6 +11,7 @@ class UserPlacesNotifier extends Notifier<List<Place>> {
   }
 }
 
+// Uses UserPlacesNotifier and yields a List<Place> object
 final userPlacesProvider = NotifierProvider<UserPlacesNotifier, List<Place>>(
   UserPlacesNotifier.new,
 );

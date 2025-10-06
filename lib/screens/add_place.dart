@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_favorite_places_app/providers/user_places.dart';
 
-class AddPlaceScreen extends StatefulWidget {
+// ConsumerStatefulWidget for riverpod
+class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
 
   @override
-  State<AddPlaceScreen> createState() {
+  ConsumerState<AddPlaceScreen> createState() {
     return _AddPlaceScreenState();
   }
 }
 
-class _AddPlaceScreenState extends State<AddPlaceScreen> {
+// ConsumerState for riverpod
+class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
+
+  void _savePlace() {
+    final String enteredTitle = _titleController.text;
+
+    if (enteredTitle.isEmpty) {
+      return;
+    }
+
+    // ref is provided by ConsumerState (riverpod),
+    // can be used to reach out to providers, in this case userPlacesProvider
+    ref.read(userPlacesProvider.notifier).addPlace(enteredTitle);
+
+    // Leaves the screen
+    Navigator.of(context).pop();
+  }
 
   @override
   void dispose() {
@@ -37,7 +56,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: _savePlace,
               icon: const Icon(Icons.add),
               label: const Text('Add place'),
             ),

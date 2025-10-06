@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_favorite_places_app/models/place.dart';
 
 class UserPlacesNotifier extends Notifier<List<Place>> {
@@ -11,7 +12,6 @@ class UserPlacesNotifier extends Notifier<List<Place>> {
   }
 }
 
-// Uses UserPlacesNotifier and yields a List<Place> object
 final userPlacesProvider = NotifierProvider<UserPlacesNotifier, List<Place>>(
   UserPlacesNotifier.new,
 );

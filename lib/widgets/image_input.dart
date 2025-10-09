@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageInput extends StatefulWidget {
-  const ImageInput({super.key});
+  const ImageInput({
+    super.key,
+    required this.onPickImage,
+  });
+
+  final void Function(File image) onPickImage;
 
   @override
   State<StatefulWidget> createState() {
@@ -28,6 +33,10 @@ class _ImageInputState extends State<ImageInput> {
     setState(() {
       _selectedImage = File(pickedImage.path);
     });
+
+    // This _selectedImage is what gets forwarded to the add_place.dart file,
+    // this happens because we are calling/using the forwarded function.
+    widget.onPickImage(_selectedImage!);
   }
 
   @override

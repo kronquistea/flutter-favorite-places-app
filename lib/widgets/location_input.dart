@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_favorite_places_app/models/place.dart';
 
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
@@ -14,7 +15,7 @@ class LocationInput extends StatefulWidget {
 }
 
 class _LocationInputState extends State<LocationInput> {
-  Location? _pickedLocation;
+  PlaceLocation? _pickedLocation;
   // Used for loading spinner
   bool _isGettingLocation = false;
 
@@ -52,6 +53,12 @@ class _LocationInputState extends State<LocationInput> {
     final lng = locationData.longitude;
     const apiKey = 'AIzaSyAWjDtXdIpu7sm8xe8L-9SJxPFqojkFpL4';
 
+    // Should also show error message
+    if (lat == null || lng == null) {
+      return;
+    }
+
+    // Should also add error checking for HTTP requests
     final url = Uri.parse(
       'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey',
     );
@@ -61,6 +68,11 @@ class _LocationInputState extends State<LocationInput> {
 
     // Remove loading spinner
     setState(() {
+      _pickedLocation = PlaceLocation(
+        latitude: lat,
+        longitude: lng,
+        address: address,
+      );
       _isGettingLocation = false;
     });
   }

@@ -7,10 +7,11 @@ class UserPlacesNotifier extends Notifier<List<Place>> {
   @override
   List<Place> build() => const [];
 
-  void addPlace(String title, File image) {
+  void addPlace(String title, File image, PlaceLocation location) {
     final newPlace = Place(
       title: title,
       image: image,
+      location: location,
     );
     state = [newPlace, ...state];
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_favorite_places_app/models/place.dart';
+import 'package:flutter_favorite_places_app/secrets/apikey.dart' as secrets;
 
 class LocationInput extends StatefulWidget {
   const LocationInput({
@@ -30,8 +31,7 @@ class _LocationInputState extends State<LocationInput> {
     }
     final lat = _pickedLocation!.latitude;
     final lng = _pickedLocation!.longitude;
-    const apiKey = 'AIzaSyAWjDtXdIpu7sm8xe8L-9SJxPFqojkFpL4';
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=$apiKey';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=${secrets.apiKey}';
   }
 
   void _getCurrentLocation() async {
@@ -66,7 +66,6 @@ class _LocationInputState extends State<LocationInput> {
 
     final lat = locationData.latitude;
     final lng = locationData.longitude;
-    const apiKey = 'AIzaSyAWjDtXdIpu7sm8xe8L-9SJxPFqojkFpL4';
 
     // Should also show error message
     if (lat == null || lng == null) {
@@ -75,7 +74,7 @@ class _LocationInputState extends State<LocationInput> {
 
     // Should also add error checking for HTTP requests
     final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey',
+      'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=${secrets.apiKey}',
     );
     final response = await http.get(url);
     final responseData = jsonDecode(response.body);

@@ -12,6 +12,8 @@
 .swiftpm/
 migrate_working_dir/
 /lib/secrets/
+android/app/src/main/AndroidManifest.xml
+ios/Runner/AppDelegate.swift
 
 # IntelliJ related
 *.iml

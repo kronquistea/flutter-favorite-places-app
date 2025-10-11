@@ -30,7 +30,7 @@ class UserPlacesNotifier extends Notifier<List<Place>> {
   @override
   List<Place> build() => const [];
 
-  void loadPlaces() async {
+  Future<void> loadPlaces() async {
     final db = await _getDatabase();
     final data = await db.query('user_places');
     final places = data
